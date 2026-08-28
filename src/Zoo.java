@@ -1,10 +1,12 @@
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  * Main class for the Creating Zoo application.
  *
- * This class provides a simple menu that allows
- * the user to interact with the animals in the zoo.
+ * This class provides a menu that allows the user
+ * to interact with the animals in the zoo.
  */
 public class Zoo {
 
@@ -26,31 +28,51 @@ public class Zoo {
         // Store the animals in an array.
         Animal[] animals = {tiger, dolphin, penguin};
 
-        int choice;
+        int choice = 0;
 
         // Continue displaying the menu until the user chooses Exit.
         do {
             displayMenu();
 
-            System.out.print("Choose an option: ");
-            choice = scanner.nextInt();
+            try {
+                System.out.print("Choose an option: ");
+                choice = scanner.nextInt();
 
-            switch (choice) {
+                switch (choice) {
 
-                case 1:
-                    displayAnimals(animals);
-                    break;
+                    case 1:
+                        displayAnimals(animals);
+                        break;
 
-                case 2:
-                    makeAnimalsEat(animals);
-                    break;
+                    case 2:
+                        makeAnimalsEat(animals);
+                        break;
 
-                case 3:
-                    System.out.println("Thank you for visiting Creating Zoo!");
-                    break;
+                    case 3:
+                        System.out.println();
+                        System.out.println("Thank you for visiting Creating Zoo!");
+                        break;
 
-                default:
-                    System.out.println("Invalid option. Please try again.");
+                    default:
+                        System.out.println();
+                        System.out.println(
+                                "Invalid option. Please choose 1, 2, or 3."
+                        );
+                }
+
+            } catch (InputMismatchException e) {
+
+                // Handle input that is not an integer.
+                System.out.println();
+                System.out.println(
+                        "Invalid input. Please enter a number."
+                );
+
+                // Remove the invalid input from the Scanner.
+                scanner.nextLine();
+
+                // Reset choice so the menu continues correctly.
+                choice = 0;
             }
 
         } while (choice != 3);
@@ -63,6 +85,7 @@ public class Zoo {
      * Displays the main zoo menu.
      */
     public static void displayMenu() {
+
         System.out.println();
         System.out.println("================================");
         System.out.println("          CREATING ZOO");
@@ -83,10 +106,13 @@ public class Zoo {
         System.out.println();
         System.out.println("===== ZOO ANIMALS =====");
 
+        // Loop through all animals.
         for (Animal animal : animals) {
+
             System.out.println("Name: " + animal.getName());
             System.out.println("Age: " + animal.getAge());
 
+            // Call the animal's specific sound.
             animal.makeSound();
 
             System.out.println();
@@ -96,9 +122,6 @@ public class Zoo {
     /**
      * Makes each animal in the zoo eat.
      *
-     * The animals are stored as Animal objects, so we check
-     * whether each animal also implements the Eat interface.
-     *
      * @param animals array containing the zoo animals
      */
     public static void makeAnimalsEat(Animal[] animals) {
@@ -106,12 +129,19 @@ public class Zoo {
         System.out.println();
         System.out.println("===== FEEDING THE ANIMALS =====");
 
+        // Loop through all animals.
         for (Animal animal : animals) {
 
+            // Check if the animal implements the Eat interface.
             if (animal instanceof Eat) {
+
+                // Convert the Animal object to an Eat object.
                 Eat eatingAnimal = (Eat) animal;
+
+                // Make the animal eat.
                 eatingAnimal.eat();
             }
         }
     }
 }
+
