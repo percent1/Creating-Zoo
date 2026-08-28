@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -20,13 +21,13 @@ public class Zoo {
         // Create a Scanner object to read user input.
         Scanner scanner = new Scanner(System.in);
 
-        // Create the animals in the zoo.
-        Animal tiger = new Tiger("Simba", 5);
-        Animal dolphin = new Dolphin("Flipper", 3);
-        Animal penguin = new Penguin("Pingu", 2);
+        // Create an ArrayList to store the zoo animals.
+        ArrayList<Animal> animals = new ArrayList<>();
 
-        // Store the animals in an array.
-        Animal[] animals = {tiger, dolphin, penguin};
+        // Add the animals to the zoo.
+        animals.add(new Tiger("Simba", 5));
+        animals.add(new Dolphin("Flipper", 3));
+        animals.add(new Penguin("Pingu", 2));
 
         int choice = 0;
 
@@ -50,7 +51,9 @@ public class Zoo {
 
                     case 3:
                         System.out.println();
-                        System.out.println("Thank you for visiting Creating Zoo!");
+                        System.out.println(
+                                "Thank you for visiting Creating Zoo!"
+                        );
                         break;
 
                     default:
@@ -71,7 +74,7 @@ public class Zoo {
                 // Remove the invalid input from the Scanner.
                 scanner.nextLine();
 
-                // Reset choice so the menu continues correctly.
+                // Reset the choice so the menu continues.
                 choice = 0;
             }
 
@@ -99,20 +102,20 @@ public class Zoo {
     /**
      * Displays information about all animals in the zoo.
      *
-     * @param animals array containing the zoo animals
+     * @param animals list containing the zoo animals
      */
-    public static void displayAnimals(Animal[] animals) {
+    public static void displayAnimals(ArrayList<Animal> animals) {
 
         System.out.println();
         System.out.println("===== ZOO ANIMALS =====");
 
-        // Loop through all animals.
+        // Loop through all animals in the ArrayList.
         for (Animal animal : animals) {
 
             System.out.println("Name: " + animal.getName());
             System.out.println("Age: " + animal.getAge());
 
-            // Call the animal's specific sound.
+            // Call the animal's specific makeSound() method.
             animal.makeSound();
 
             System.out.println();
@@ -122,14 +125,14 @@ public class Zoo {
     /**
      * Makes each animal in the zoo eat.
      *
-     * @param animals array containing the zoo animals
+     * @param animals list containing the zoo animals
      */
-    public static void makeAnimalsEat(Animal[] animals) {
+    public static void makeAnimalsEat(ArrayList<Animal> animals) {
 
         System.out.println();
         System.out.println("===== FEEDING THE ANIMALS =====");
 
-        // Loop through all animals.
+        // Loop through all animals in the ArrayList.
         for (Animal animal : animals) {
 
             // Check if the animal implements the Eat interface.
