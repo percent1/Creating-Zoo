@@ -18,7 +18,6 @@ public class Zoo {
      */
     public static void main(String[] args) {
 
-        // Create a Scanner object to read user input.
         Scanner scanner = new Scanner(System.in);
 
         // Create an ArrayList to store the zoo animals.
@@ -50,14 +49,22 @@ public class Zoo {
                         break;
 
                     case 3:
-                        saveAnimalData(animals);
+                        makeAnimalsWalk(animals);
                         break;
 
                     case 4:
-                        loadAnimalData();
+                        makeAnimalsSwim(animals);
                         break;
 
                     case 5:
+                        saveAnimalData(animals);
+                        break;
+
+                    case 6:
+                        loadAnimalData();
+                        break;
+
+                    case 7:
                         System.out.println();
                         System.out.println(
                                 "Thank you for visiting Creating Zoo!"
@@ -67,28 +74,24 @@ public class Zoo {
                     default:
                         System.out.println();
                         System.out.println(
-                                "Invalid option. Please choose 1, 2, 3, 4, or 5."
+                                "Invalid option. Please choose 1 to 7."
                         );
                 }
 
             } catch (InputMismatchException e) {
 
-                // Handle input that is not an integer.
                 System.out.println();
                 System.out.println(
                         "Invalid input. Please enter a number."
                 );
 
-                // Remove the invalid input from the Scanner.
                 scanner.nextLine();
 
-                // Reset the choice so the menu continues.
                 choice = 0;
             }
 
-        } while (choice != 5);
+        } while (choice != 7);
 
-        // Close the Scanner when the program finishes.
         scanner.close();
     }
 
@@ -103,14 +106,16 @@ public class Zoo {
         System.out.println("================================");
         System.out.println("1. View Animals");
         System.out.println("2. Make Animals Eat");
-        System.out.println("3. Save Animal Data");
-        System.out.println("4. Load Animal Data");
-        System.out.println("5. Exit");
+        System.out.println("3. Make Animals Walk");
+        System.out.println("4. Make Animals Swim");
+        System.out.println("5. Save Animal Data");
+        System.out.println("6. Load Animal Data");
+        System.out.println("7. Exit");
         System.out.println("================================");
     }
 
     /**
-     * Displays information about all animals in the zoo.
+     * Displays information about all animals.
      *
      * @param animals list containing the zoo animals
      */
@@ -131,7 +136,7 @@ public class Zoo {
     }
 
     /**
-     * Makes each animal in the zoo eat.
+     * Makes each animal eat.
      *
      * @param animals list containing the zoo animals
      */
@@ -145,8 +150,47 @@ public class Zoo {
             if (animal instanceof Eat) {
 
                 Eat eatingAnimal = (Eat) animal;
-
                 eatingAnimal.eat();
+            }
+        }
+    }
+
+    /**
+     * Makes animals that can walk perform their walking behavior.
+     *
+     * @param animals list containing the zoo animals
+     */
+    public static void makeAnimalsWalk(ArrayList<Animal> animals) {
+
+        System.out.println();
+        System.out.println("===== WALKING ANIMALS =====");
+
+        for (Animal animal : animals) {
+
+            if (animal instanceof Walk) {
+
+                Walk walkingAnimal = (Walk) animal;
+                walkingAnimal.walk();
+            }
+        }
+    }
+
+    /**
+     * Makes animals that can swim perform their swimming behavior.
+     *
+     * @param animals list containing the zoo animals
+     */
+    public static void makeAnimalsSwim(ArrayList<Animal> animals) {
+
+        System.out.println();
+        System.out.println("===== SWIMMING ANIMALS =====");
+
+        for (Animal animal : animals) {
+
+            if (animal instanceof Swim) {
+
+                Swim swimmingAnimal = (Swim) animal;
+                swimmingAnimal.swim();
             }
         }
     }

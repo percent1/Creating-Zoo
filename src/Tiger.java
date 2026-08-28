@@ -1,13 +1,10 @@
-import java.io.Serializable;
 
 /**
  * Represents a tiger in the zoo.
  *
- * Tiger extends Animal and implements Eat
+ * Tiger extends Animal and implements Eat, Walk,
  * and Serializable.
- */
-public class Tiger extends Animal implements Eat, Serializable {
-
+ */public class Tiger extends Animal implements Eat, Walk{
     /**
      * Required for serialization.
      */
@@ -37,6 +34,14 @@ public class Tiger extends Animal implements Eat, Serializable {
     @Override
     public void eat() {
         System.out.println("The tiger eats meat.");
+    }
+
+    /**
+     * Defines how the tiger walks.
+     */
+    @Override
+    public void walk() {
+        System.out.println("The tiger walks on four legs.");
     }
 
     /**

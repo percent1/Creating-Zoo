@@ -1,12 +1,13 @@
+
 import java.io.Serializable;
 
 /**
  * Represents a penguin in the zoo.
  *
- * Penguin extends Animal and implements Eat
- * and Serializable.
+ * Penguin extends Animal and implements Eat, Walk,
+ * Swim, and Serializable.
  */
-public class Penguin extends Animal implements Eat, Serializable {
+public class Penguin extends Animal implements Eat, Walk, Swim, Serializable {
 
     /**
      * Required for serialization.
@@ -37,6 +38,22 @@ public class Penguin extends Animal implements Eat, Serializable {
     @Override
     public void eat() {
         System.out.println("The penguin eats fish.");
+    }
+
+    /**
+     * Defines how the penguin walks.
+     */
+    @Override
+    public void walk() {
+        System.out.println("The penguin waddles on two feet.");
+    }
+
+    /**
+     * Defines how the penguin swims.
+     */
+    @Override
+    public void swim() {
+        System.out.println("The penguin swims through the water.");
     }
 
     /**

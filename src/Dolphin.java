@@ -3,10 +3,10 @@ import java.io.Serializable;
 /**
  * Represents a dolphin in the zoo.
  *
- * Dolphin extends Animal and implements Eat
+ * Dolphin extends Animal and implements Eat, Swim,
  * and Serializable.
  */
-public class Dolphin extends Animal implements Eat, Serializable {
+public class Dolphin extends Animal implements Eat, Swim, Serializable {
 
     /**
      * Required for serialization.
@@ -37,6 +37,14 @@ public class Dolphin extends Animal implements Eat, Serializable {
     @Override
     public void eat() {
         System.out.println("The dolphin eats fish.");
+    }
+
+    /**
+     * Defines how the dolphin swims.
+     */
+    @Override
+    public void swim() {
+        System.out.println("The dolphin swims through the water.");
     }
 
     /**
