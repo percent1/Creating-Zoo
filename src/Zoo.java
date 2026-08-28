@@ -50,6 +50,14 @@ public class Zoo {
                         break;
 
                     case 3:
+                        saveAnimalData(animals);
+                        break;
+
+                    case 4:
+                        loadAnimalData();
+                        break;
+
+                    case 5:
                         System.out.println();
                         System.out.println(
                                 "Thank you for visiting Creating Zoo!"
@@ -59,7 +67,7 @@ public class Zoo {
                     default:
                         System.out.println();
                         System.out.println(
-                                "Invalid option. Please choose 1, 2, or 3."
+                                "Invalid option. Please choose 1, 2, 3, 4, or 5."
                         );
                 }
 
@@ -78,7 +86,7 @@ public class Zoo {
                 choice = 0;
             }
 
-        } while (choice != 3);
+        } while (choice != 5);
 
         // Close the Scanner when the program finishes.
         scanner.close();
@@ -95,7 +103,9 @@ public class Zoo {
         System.out.println("================================");
         System.out.println("1. View Animals");
         System.out.println("2. Make Animals Eat");
-        System.out.println("3. Exit");
+        System.out.println("3. Save Animal Data");
+        System.out.println("4. Load Animal Data");
+        System.out.println("5. Exit");
         System.out.println("================================");
     }
 
@@ -109,13 +119,11 @@ public class Zoo {
         System.out.println();
         System.out.println("===== ZOO ANIMALS =====");
 
-        // Loop through all animals in the ArrayList.
         for (Animal animal : animals) {
 
             System.out.println("Name: " + animal.getName());
             System.out.println("Age: " + animal.getAge());
 
-            // Call the animal's specific makeSound() method.
             animal.makeSound();
 
             System.out.println();
@@ -132,18 +140,90 @@ public class Zoo {
         System.out.println();
         System.out.println("===== FEEDING THE ANIMALS =====");
 
-        // Loop through all animals in the ArrayList.
         for (Animal animal : animals) {
 
-            // Check if the animal implements the Eat interface.
             if (animal instanceof Eat) {
 
-                // Convert the Animal object to an Eat object.
                 Eat eatingAnimal = (Eat) animal;
 
-                // Make the animal eat.
                 eatingAnimal.eat();
             }
+        }
+    }
+
+    /**
+     * Saves all zoo animals to their respective files.
+     *
+     * @param animals list containing the zoo animals
+     */
+    public static void saveAnimalData(ArrayList<Animal> animals) {
+
+        System.out.println();
+        System.out.println("===== SAVING ANIMAL DATA =====");
+
+        for (Animal animal : animals) {
+
+            if (animal instanceof Tiger) {
+
+                AnimalFileManager.saveAnimal(
+                        animal,
+                        "data/tiger.txt"
+                );
+
+            } else if (animal instanceof Dolphin) {
+
+                AnimalFileManager.saveAnimal(
+                        animal,
+                        "data/dolphin.txt"
+                );
+
+            } else if (animal instanceof Penguin) {
+
+                AnimalFileManager.saveAnimal(
+                        animal,
+                        "data/penguin.txt"
+                );
+            }
+        }
+    }
+
+    /**
+     * Loads all animals from their respective files
+     * and displays the saved data.
+     */
+    public static void loadAnimalData() {
+
+        System.out.println();
+        System.out.println("===== LOADING ANIMAL DATA =====");
+
+        Animal tiger =
+                AnimalFileManager.loadAnimal(
+                        "data/tiger.txt"
+                );
+
+        Animal dolphin =
+                AnimalFileManager.loadAnimal(
+                        "data/dolphin.txt"
+                );
+
+        Animal penguin =
+                AnimalFileManager.loadAnimal(
+                        "data/penguin.txt"
+                );
+
+        System.out.println();
+        System.out.println("===== SAVED ANIMAL DATA =====");
+
+        if (tiger != null) {
+            System.out.println(tiger);
+        }
+
+        if (dolphin != null) {
+            System.out.println(dolphin);
+        }
+
+        if (penguin != null) {
+            System.out.println(penguin);
         }
     }
 }
