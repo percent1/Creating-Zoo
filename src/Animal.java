@@ -1,13 +1,24 @@
+import java.io.Serializable;
+
 /**
  * Represents the base class for all animals in the zoo.
  *
- * This is an abstract class, which means it cannot be
- * instantiated directly. Specific animal classes such as
- * Tiger, Dolphin, and Penguin will extend this class.
+ * Animal is an abstract class and provides common
+ * properties shared by all animals.
+ *
+ * The class implements Serializable so that animal
+ * objects can be saved to files.
  */
-public abstract class Animal {
+public abstract class Animal implements Serializable {
+
+    /**
+     * Required for serialization.
+     */
+    private static final long serialVersionUID = 1L;
+
     // Stores the animal's name.
     private String name;
+
     // Stores the animal's age.
     private int age;
 
@@ -44,7 +55,8 @@ public abstract class Animal {
      * Makes a sound specific to the animal.
      *
      * Each animal subclass must provide its own
-     * implementation of this method.
+     * implementation.
      */
     public abstract void makeSound();
 }
+

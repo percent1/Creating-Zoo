@@ -1,10 +1,17 @@
+import java.io.Serializable;
+
 /**
  * Represents a dolphin in the zoo.
  *
- * Dolphin extends the Animal class and implements
- * the Eat interface.
+ * Dolphin extends Animal and implements Eat
+ * and Serializable.
  */
-public class Dolphin extends Animal implements Eat {
+public class Dolphin extends Animal implements Eat, Serializable {
+
+    /**
+     * Required for serialization.
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * Creates a new Dolphin.
@@ -13,7 +20,6 @@ public class Dolphin extends Animal implements Eat {
      * @param age the age of the dolphin
      */
     public Dolphin(String name, int age) {
-        // Call the constructor of the Animal parent class.
         super(name, age);
     }
 
@@ -32,4 +38,14 @@ public class Dolphin extends Animal implements Eat {
     public void eat() {
         System.out.println("The dolphin eats fish.");
     }
+
+    /**
+     * Returns a readable representation of the dolphin.
+     */
+    @Override
+    public String toString() {
+        return "Dolphin{name='" + getName()
+                + "', age=" + getAge() + "}";
+    }
 }
+

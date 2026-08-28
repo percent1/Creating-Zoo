@@ -1,10 +1,17 @@
+import java.io.Serializable;
+
 /**
  * Represents a tiger in the zoo.
  *
- * Tiger extends the Animal class and implements
- * the Eat interface.
+ * Tiger extends Animal and implements Eat
+ * and Serializable.
  */
-public class Tiger extends Animal implements Eat {
+public class Tiger extends Animal implements Eat, Serializable {
+
+    /**
+     * Required for serialization.
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * Creates a new Tiger.
@@ -13,7 +20,6 @@ public class Tiger extends Animal implements Eat {
      * @param age the age of the tiger
      */
     public Tiger(String name, int age) {
-        // Call the constructor of the Animal parent class.
         super(name, age);
     }
 
@@ -32,4 +38,14 @@ public class Tiger extends Animal implements Eat {
     public void eat() {
         System.out.println("The tiger eats meat.");
     }
+
+    /**
+     * Returns a readable representation of the tiger.
+     */
+    @Override
+    public String toString() {
+        return "Tiger{name='" + getName()
+                + "', age=" + getAge() + "}";
+    }
 }
+
