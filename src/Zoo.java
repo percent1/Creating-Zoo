@@ -1,43 +1,117 @@
+import java.util.Scanner;
+
 /**
  * Main class for the Creating Zoo application.
  *
- * This class creates different animals and demonstrates
- * inheritance, interfaces, and polymorphism.
+ * This class provides a simple menu that allows
+ * the user to interact with the animals in the zoo.
  */
 public class Zoo {
 
     /**
-     * The main method starts the Zoo application.
+     * Starts the Creating Zoo application.
      *
      * @param args command-line arguments
      */
     public static void main(String[] args) {
 
-        // Create a Tiger object.
+        // Create a Scanner object to read user input.
+        Scanner scanner = new Scanner(System.in);
+
+        // Create the animals in the zoo.
         Animal tiger = new Tiger("Simba", 5);
-
-        // Create a Dolphin object.
         Animal dolphin = new Dolphin("Flipper", 3);
-
-        // Create a Penguin object.
         Animal penguin = new Penguin("Pingu", 2);
 
-        // Display the tiger's information.
-        System.out.println("=== Tiger ===");
-        System.out.println("Name: " + tiger.getName());
-        System.out.println("Age: " + tiger.getAge());
-        tiger.makeSound();
+        // Store the animals in an array.
+        Animal[] animals = {tiger, dolphin, penguin};
 
-        // Display the dolphin's information.
-        System.out.println("\n=== Dolphin ===");
-        System.out.println("Name: " + dolphin.getName());
-        System.out.println("Age: " + dolphin.getAge());
-        dolphin.makeSound();
+        int choice;
 
-        // Display the penguin's information.
-        System.out.println("\n=== Penguin ===");
-        System.out.println("Name: " + penguin.getName());
-        System.out.println("Age: " + penguin.getAge());
-        penguin.makeSound();
+        // Continue displaying the menu until the user chooses Exit.
+        do {
+            displayMenu();
+
+            System.out.print("Choose an option: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    displayAnimals(animals);
+                    break;
+
+                case 2:
+                    makeAnimalsEat(animals);
+                    break;
+
+                case 3:
+                    System.out.println("Thank you for visiting Creating Zoo!");
+                    break;
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+
+        } while (choice != 3);
+
+        // Close the Scanner when the program finishes.
+        scanner.close();
+    }
+
+    /**
+     * Displays the main zoo menu.
+     */
+    public static void displayMenu() {
+        System.out.println();
+        System.out.println("================================");
+        System.out.println("          CREATING ZOO");
+        System.out.println("================================");
+        System.out.println("1. View Animals");
+        System.out.println("2. Make Animals Eat");
+        System.out.println("3. Exit");
+        System.out.println("================================");
+    }
+
+    /**
+     * Displays information about all animals in the zoo.
+     *
+     * @param animals array containing the zoo animals
+     */
+    public static void displayAnimals(Animal[] animals) {
+
+        System.out.println();
+        System.out.println("===== ZOO ANIMALS =====");
+
+        for (Animal animal : animals) {
+            System.out.println("Name: " + animal.getName());
+            System.out.println("Age: " + animal.getAge());
+
+            animal.makeSound();
+
+            System.out.println();
+        }
+    }
+
+    /**
+     * Makes each animal in the zoo eat.
+     *
+     * The animals are stored as Animal objects, so we check
+     * whether each animal also implements the Eat interface.
+     *
+     * @param animals array containing the zoo animals
+     */
+    public static void makeAnimalsEat(Animal[] animals) {
+
+        System.out.println();
+        System.out.println("===== FEEDING THE ANIMALS =====");
+
+        for (Animal animal : animals) {
+
+            if (animal instanceof Eat) {
+                Eat eatingAnimal = (Eat) animal;
+                eatingAnimal.eat();
+            }
+        }
     }
 }
